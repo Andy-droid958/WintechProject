@@ -1,0 +1,20 @@
+# Render.com Configuration
+# This file is optional - you can also configure through the Render dashboard
+
+# For Static Site deployment (Recommended):
+# - Go to Render Dashboard → New Static Site
+# - Build Command: npm install && npm run build
+# - Publish Directory: dist
+# - Environment: Static
+
+# For Web Service deployment:
+services:
+  - type: web
+    name: wintech-website
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npx serve -s dist -l 10000
+    envVars:
+      - key: NODE_ENV
+        value: production
+

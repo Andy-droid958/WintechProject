@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply font-sans text-gray-900 antialiased;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes mercuryShine {
+  0% {
+    background-position: 0% 50%;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)) brightness(1);
+  }
+  50% {
+    background-position: 100% 50%;
+    filter: drop-shadow(0 2px 8px rgba(255,255,255,0.5)) brightness(1.2);
+  }
+  100% {
+    background-position: 0% 50%;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)) brightness(1);
+  }
+}
+
