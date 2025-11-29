@@ -80,7 +80,7 @@ const HomeSections = () => {
           >
             <img
               src={section.image}
-              alt={`Section ${section.id}`}
+              alt={`${section.label} - Wintech Project Sdn Bhd aluminum construction services Malaysia`}
               className="w-full h-full object-cover transition-all duration-500 ease-out"
               style={{
                 transform: `translateY(${transform.translateY || 0}px) translateX(${transform.translateX || 0}px) scale(${transform.scale})`,

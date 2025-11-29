@@ -1,0 +1,14 @@
+# robots.txt for Wintech Project Sdn Bhd
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.wintechproject.com/sitemap.xml
+
+# Disallow admin or private areas (if any)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Crawl delay (optional, can help with server load)
+Crawl-delay: 1
+

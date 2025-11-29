@@ -137,7 +137,7 @@ const WhatWeDo = () => {
               <div className="w-full lg:w-1/2 h-64 md:h-80 overflow-hidden">
                 <img
                   src={category.image}
-                  alt={category.title}
+                  alt={`${category.title} - Aluminum ${category.title.toLowerCase()} fabrication and installation services in Malaysia by Wintech Project Sdn Bhd`}
                   className="w-full h-full object-cover"
                 />
               </div>
