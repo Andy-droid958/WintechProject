@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://www.wintechproject.com/sitemap.xml
+Sitemap: https://wintechproject.onrender.com/sitemap.xml
 
 # Disallow admin or private areas (if any)
 # Disallow: /admin/
