@@ -13,7 +13,7 @@ services:
     name: wintech-website
     env: node
     buildCommand: npm install && npm run build
-    startCommand: npx serve -s dist -l 10000
+    startCommand: node server.js
     envVars:
       - key: NODE_ENV
         value: production
