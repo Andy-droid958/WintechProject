@@ -9,6 +9,7 @@ import pic13 from '../statics/pic13.png'
 const WhatWeDo = () => {
   const [visibleSections, setVisibleSections] = useState([])
   const [scrollY, setScrollY] = useState(0)
+  const [imageLoaded, setImageLoaded] = useState(false)
   const sectionRefs = useRef([])
 
   useEffect(() => {
@@ -18,6 +19,13 @@ const WhatWeDo = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Preload image
+  useEffect(() => {
+    const img = new Image()
+    img.src = pic7
+    img.onload = () => setImageLoaded(true)
   }, [])
 
   useEffect(() => {
@@ -101,7 +109,9 @@ const WhatWeDo = () => {
       {/* Title Section with Background Image */}
       <div className="relative h-64 md:h-80 mb-16 overflow-hidden">
         <div
-          className="absolute inset-0 transition-transform duration-300 ease-out"
+          className={`absolute inset-0 transition-all duration-300 ease-out ${
+            imageLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
           style={{
             backgroundImage: `url(${pic7})`,
             backgroundSize: 'cover',
@@ -113,7 +123,9 @@ const WhatWeDo = () => {
         {/* Shader/Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70" />
         {/* Title */}
-        <div className="relative z-10 h-full flex items-center justify-center">
+        <div className={`relative z-10 h-full flex items-center justify-center transition-opacity duration-300 ${
+          imageLoaded ? 'opacity-100' : 'opacity-0'
+        }`}>
           <h2 className="text-4xl md:text-5xl font-bold text-white text-center">
             What We Do
           </h2>

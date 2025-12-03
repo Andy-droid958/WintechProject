@@ -3,6 +3,7 @@ import pic20 from '../statics/pic23.jpg'
 
 const Hero = () => {
   const [scrollY, setScrollY] = useState(0)
+  const [imageLoaded, setImageLoaded] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -11,6 +12,13 @@ const Hero = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Preload image
+  useEffect(() => {
+    const img = new Image()
+    img.src = pic20
+    img.onload = () => setImageLoaded(true)
   }, [])
 
   // Calculate opacity based on scroll position (fade out over 300px)
@@ -30,15 +38,20 @@ const Hero = () => {
         <img
           src={pic20}
           alt="Wintech Project Sdn Bhd"
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-out"
+          className={`absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-out ${
+            imageLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
           style={{
             transform: `scale(${imageScale})`,
           }}
+          onLoad={() => setImageLoaded(true)}
         />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 h-full flex items-center justify-center px-4">
+      <div className={`relative z-10 h-full flex items-center justify-center px-4 transition-opacity duration-300 ${
+        imageLoaded ? 'opacity-100' : 'opacity-0'
+      }`}>
         <div className="text-center" style={{ opacity }}>
           <h1 
             className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 text-red-600"

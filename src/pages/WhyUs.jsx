@@ -6,6 +6,7 @@ import pic6 from '../statics/pic6.jpg'
 const WhyUs = () => {
   const [visibleCards, setVisibleCards] = useState([])
   const [scrollY, setScrollY] = useState(0)
+  const [imageLoaded, setImageLoaded] = useState(false)
   const cardRefs = useRef([])
   const documentsRefs = useRef([])
 
@@ -16,6 +17,13 @@ const WhyUs = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Preload image
+  useEffect(() => {
+    const img = new Image()
+    img.src = pic6
+    img.onload = () => setImageLoaded(true)
   }, [])
 
   useEffect(() => {
@@ -79,7 +87,9 @@ const WhyUs = () => {
       {/* Title Section with Background Image */}
       <div className="relative h-64 md:h-80 overflow-hidden">
         <div
-          className="absolute inset-0 transition-transform duration-300 ease-out"
+          className={`absolute inset-0 transition-all duration-300 ease-out ${
+            imageLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
           style={{
             backgroundImage: `url(${pic6})`,
             backgroundSize: 'cover',
@@ -91,7 +101,9 @@ const WhyUs = () => {
         {/* Shader/Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70" />
         {/* Title */}
-        <div className="relative z-10 h-full flex items-center justify-center">
+        <div className={`relative z-10 h-full flex items-center justify-center transition-opacity duration-300 ${
+          imageLoaded ? 'opacity-100' : 'opacity-0'
+        }`}>
           <h1 className="text-4xl md:text-5xl font-bold text-white text-center">
             Why Us
           </h1>
