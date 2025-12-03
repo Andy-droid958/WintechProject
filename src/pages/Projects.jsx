@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import pic8 from '../statics/pic8.jpg'
 
 const Projects = () => {
+  const [scrollY, setScrollY] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
   
   return (
     <>
@@ -11,12 +21,13 @@ const Projects = () => {
       {/* Title Section with Background Image */}
       <div className="relative h-64 md:h-80 overflow-hidden">
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 transition-transform duration-300 ease-out"
           style={{
             backgroundImage: `url(${pic8})`,
             backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            backgroundPosition: 'center 60%',
             backgroundRepeat: 'no-repeat',
+            transform: `scale(${Math.max(1.0, 1.2 - (scrollY / (typeof window !== 'undefined' ? window.innerHeight : 800)) * 0.2)})`,
           }}
         />
         {/* Shader/Overlay */}

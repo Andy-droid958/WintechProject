@@ -23,25 +23,33 @@ const ContactForm = () => {
     setIsSubmitting(true)
     setStatus({ type: '', message: '' })
 
-    // Format phone number for WhatsApp (Malaysia: +60, remove leading 0)
-    const phoneNumber = '60189456188' // 03-6277 3388 formatted for WhatsApp
+    // Email address
+    const emailAddress = 'wintechpsb@gmail.com'
     
-    // Format the message
-    const message = `New Contact Form Submission\n\n` +
+    // Format the email body with a professional template
+    const emailBody = `Dear Wintech Project Sdn Bhd Team,\n\n` +
+      `I hope this email finds you well. I am writing to inquire about your aluminum and glass construction services.\n\n` +
+      `My contact information and inquiry details are as below:\n\n` +
+      `CONTACT INFORMATION:\n` +
       `Name: ${formData.name}\n` +
       `Email: ${formData.email}\n` +
-      `Phone: ${formData.phone || 'Not provided'}\n` +
-      `Subject: ${formData.subject}\n\n` +
-      `Message:\n${formData.message}`
+      `Phone: ${formData.phone || 'Not provided'}\n\n` +
+      `INQUIRY DETAILS:\n` +
+      `Subject: ${formData.subject}\n` +
+      `Message:\n${formData.message}\n\n` +
+      `I look forward to hearing from you soon.\n\n` +
+      `Best regards,\n` +
+      `${formData.name}`
 
-    // Encode the message for URL
-    const encodedMessage = encodeURIComponent(message)
+    // Encode the subject and body for URL
+    const encodedSubject = encodeURIComponent(formData.subject || 'Contact Form Inquiry')
+    const encodedBody = encodeURIComponent(emailBody)
     
-    // Create WhatsApp URL
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`
+    // Create Gmail mailto URL
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${emailAddress}&su=${encodedSubject}&body=${encodedBody}`
     
-    // Open WhatsApp in a new window/tab
-    window.open(whatsappUrl, '_blank')
+    // Open Gmail in a new window/tab
+    window.open(gmailUrl, '_blank')
     
     // Reset form
     setFormData({

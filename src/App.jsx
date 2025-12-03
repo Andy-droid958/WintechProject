@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import ScrollToTop from './components/ScrollToTop'
-import WhatsAppFloat from './components/WhatsAppFloat'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import About from './pages/About'
@@ -31,7 +30,6 @@ function App() {
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </div>
-      <WhatsAppFloat />
     </Router>
   )
 }

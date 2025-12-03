@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import HomeSections from '../components/HomeSections'
+import ContactSection from '../components/ContactSection'
 import Footer from '../components/Footer'
 
 const Home = () => {
@@ -40,6 +41,7 @@ const Home = () => {
         </div>
       )}
       <HomeSections />
+      <ContactSection />
       <Footer />
     </>
   )

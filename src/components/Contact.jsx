@@ -1,8 +1,18 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import ContactForm from './ContactForm'
-import pic5 from '../statics/pic5.jpg'
+import pic5 from '../statics/pic14.jpg'
 
 const Contact = () => {
+  const [scrollY, setScrollY] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
   const contactItems = [
     {
       icon: '🏢',
@@ -31,26 +41,22 @@ const Contact = () => {
       {/* Title Section with Background Image */}
       <div className="relative h-64 md:h-80 overflow-hidden">
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 transition-transform duration-300 ease-out"
           style={{
             backgroundImage: `url(${pic5})`,
             backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            backgroundPosition: 'center 75%',
             backgroundRepeat: 'no-repeat',
+            transform: `scale(${Math.max(1.0, 1.2 - (scrollY / (typeof window !== 'undefined' ? window.innerHeight : 800)) * 0.2)})`,
           }}
         />
         {/* Shader/Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70" />
         {/* Title */}
         <div className="relative z-10 h-full flex items-center justify-center">
-          <div className="text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-3">
-              Get In Touch
-            </h2>
-            <p className="text-lg text-gray-200">
-              Contact us for your aluminum construction needs
-            </p>
-          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-white text-center">
+            Get In Touch
+          </h2>
         </div>
       </div>
       

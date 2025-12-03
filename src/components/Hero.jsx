@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import pic3 from '../statics/pic3.jpg'
+import pic20 from '../statics/pic23.jpg'
 
 const Hero = () => {
   const [scrollY, setScrollY] = useState(0)
@@ -27,18 +27,14 @@ const Hero = () => {
     <section id="home" className="relative h-screen min-h-[500px] overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 overflow-hidden">
-        <div
-          className="absolute inset-0 transition-transform duration-300 ease-out"
+        <img
+          src={pic20}
+          alt="Wintech Project Sdn Bhd"
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-out"
           style={{
-            backgroundImage: `url(${pic3})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
             transform: `scale(${imageScale})`,
           }}
         />
-        {/* Shader/Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent" />
       </div>
 
       {/* Content */}
@@ -47,8 +43,16 @@ const Hero = () => {
           <h1 
             className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 text-red-600"
             style={{
-              textShadow: '0 0 30px rgba(220, 38, 38, 0.6), 0 0 60px rgba(220, 38, 38, 0.4)',
-              filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))',
+              textShadow: `
+                -1px -1px 0px rgba(0, 0, 0, 0.7),
+                1px 1px 0px rgba(255, 255, 255, 0.4),
+                -2px -2px 0px rgba(0, 0, 0, 0.6),
+                2px 2px 0px rgba(255, 255, 255, 0.3),
+                -3px -3px 2px rgba(0, 0, 0, 0.5),
+                3px 3px 2px rgba(255, 255, 255, 0.2),
+                0 0 30px rgba(220, 38, 38, 0.6),
+                0 0 60px rgba(220, 38, 38, 0.4)
+              `,
               fontWeight: '900',
               letterSpacing: '0.05em',
             }}
@@ -56,7 +60,7 @@ const Hero = () => {
             Wintech Project SDN BHD
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl font-medium italic opacity-90 text-white">
-            Excellence in Aluminum Construction
+            Specialize in glass and aluminium
           </p>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import pic7 from '../statics/pic7.jpg'
+import pic7 from '../statics/pic18.png'
 import pic9 from '../statics/pic9.png'
 import pic10 from '../statics/pic10.png'
 import pic11 from '../statics/pic11.png'
@@ -8,7 +8,17 @@ import pic13 from '../statics/pic13.png'
 
 const WhatWeDo = () => {
   const [visibleSections, setVisibleSections] = useState([])
+  const [scrollY, setScrollY] = useState(0)
   const sectionRefs = useRef([])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   useEffect(() => {
     const observers = sectionRefs.current.map((ref, index) => {
@@ -87,16 +97,17 @@ const WhatWeDo = () => {
   ]
 
   return (
-    <section className="bg-blue-50/50 pb-20">
+    <section className="pb-20">
       {/* Title Section with Background Image */}
       <div className="relative h-64 md:h-80 mb-16 overflow-hidden">
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 transition-transform duration-300 ease-out"
           style={{
             backgroundImage: `url(${pic7})`,
             backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            backgroundPosition: 'center 50%',
             backgroundRepeat: 'no-repeat',
+            transform: `scale(${Math.max(1.0, 1.2 - (scrollY / (typeof window !== 'undefined' ? window.innerHeight : 800)) * 0.2)})`,
           }}
         />
         {/* Shader/Overlay */}
@@ -125,25 +136,36 @@ const WhatWeDo = () => {
             <div 
               key={index}
               ref={(el) => (sectionRefs.current[index] = el)}
-              className={`flex flex-col ${
+              className={`relative flex flex-col ${
                 index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
-              } gap-8 items-center bg-white p-8 transition-all duration-1000 ${
+              } gap-8 items-center bg-white p-8 transition-all duration-1000 overflow-hidden ${
                 isVisible 
                   ? 'opacity-100 translate-y-0' 
                   : 'opacity-0 translate-y-10'
               }`}
             >
+              {/* Background rectangle that slides in from alternating sides */}
+              <div 
+                className={`absolute inset-0 bg-gray-100 z-0 transition-transform duration-1000 ease-out ${
+                  isVisible 
+                    ? 'translate-x-0' 
+                    : index % 2 === 0 
+                      ? '-translate-x-full' 
+                      : 'translate-x-full'
+                }`}
+                style={{ transitionDelay: '200ms' }}
+              />
               {/* Image Section */}
-              <div className="w-full lg:w-1/2 h-64 md:h-80 overflow-hidden">
+              <div className="relative z-10 w-full lg:w-1/2 h-64 md:h-80 overflow-hidden">
                 <img
                   src={category.image}
                   alt={`${category.title} - Aluminum ${category.title.toLowerCase()} fabrication and installation services in Malaysia by Wintech Project Sdn Bhd`}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                 />
               </div>
 
               {/* Description Section */}
-              <div className="w-full lg:w-1/2 max-w-7xl mx-auto px-6">
+              <div className="relative z-10 w-full lg:w-1/2 max-w-7xl mx-auto px-6">
                 <h3 className="text-3xl font-bold text-primary mb-6 opacity-80">
                   {category.title}
                 </h3>

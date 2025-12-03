@@ -5,8 +5,18 @@ import pic6 from '../statics/pic6.jpg'
 
 const WhyUs = () => {
   const [visibleCards, setVisibleCards] = useState([])
+  const [scrollY, setScrollY] = useState(0)
   const cardRefs = useRef([])
   const documentsRefs = useRef([])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   useEffect(() => {
     // Observer for Why Us cards
@@ -69,12 +79,13 @@ const WhyUs = () => {
       {/* Title Section with Background Image */}
       <div className="relative h-64 md:h-80 overflow-hidden">
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 transition-transform duration-300 ease-out"
           style={{
             backgroundImage: `url(${pic6})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
+            transform: `scale(${Math.max(1.0, 1.2 - (scrollY / (typeof window !== 'undefined' ? window.innerHeight : 800)) * 0.2)})`,
           }}
         />
         {/* Shader/Overlay */}
@@ -114,7 +125,7 @@ const WhyUs = () => {
                 <div className="flex-1">
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Certified & Fully Compliant</h3>
                   <p className="text-base text-gray-700 leading-relaxed">
-                    We hold essential industry certifications including SSM, CIDB & CIDB-PPS, and the Product Certificate of Conformity (CREAM). These certifications confirm our compliance with national regulations, safety requirements, and product performance standards — giving clients full confidence in our workmanship.
+                    We hold essential industry certifications including CIDB & CIDB-PPS, and the Product Certificate of Conformity (CREAM). These certifications confirm our compliance with national regulations, safety requirements, and product performance standards — giving clients full confidence in our workmanship.
                   </p>
                 </div>
               </div>
@@ -259,68 +270,97 @@ const WhyUs = () => {
               Supporting Documents
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* Document Placeholder - SSM */}
+              {/* PDF Preview - CIDB */}
               <div 
                 ref={(el) => (documentsRefs.current[0] = el)}
-                className={`bg-gray-50 p-6 rounded-xl border-2 border-primary transition-all duration-700 hover:shadow-lg hover:scale-[1.02] ${
+                className={`transition-all duration-700 ${
                   visibleCards.includes('doc-0')
                     ? 'opacity-100 translate-y-0'
                     : 'opacity-0 translate-y-10'
                 }`}
               >
-                <div className="text-center">
-                  <div className="text-5xl mb-4">📄</div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">SSM Certificate</h3>
-                  <p className="text-sm text-gray-600">Company Registration</p>
+                <div className="flex items-center justify-center gap-3 mb-4">
+                  <div className="flex-shrink-0 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-lg font-bold">1</div>
+                  <h3 className="text-xl font-bold text-gray-900">CIDB Certificate</h3>
                 </div>
+                <div className="bg-gray-50 rounded-xl border-2 border-primary overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+                  <iframe
+                    src="/CIDB.pdf"
+                    className="w-full h-96"
+                    title="CIDB Certificate"
+                    style={{ border: 'none' }}
+                  />
+                </div>
+                <a
+                  href="/CIDB.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 block text-center text-primary hover:text-primary-dark font-semibold transition-colors"
+                >
+                  View in new page →
+                </a>
               </div>
 
-              {/* Document Placeholder - CIDB */}
+              {/* PDF Preview - CIDB-PPS */}
               <div 
                 ref={(el) => (documentsRefs.current[1] = el)}
-                className={`bg-gray-50 p-6 rounded-xl border-2 border-primary transition-all duration-700 hover:shadow-lg hover:scale-[1.02] ${
+                className={`transition-all duration-700 ${
                   visibleCards.includes('doc-1')
                     ? 'opacity-100 translate-y-0'
                     : 'opacity-0 translate-y-10'
                 }`}
               >
-                <div className="text-center">
-                  <div className="text-5xl mb-4">📋</div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">CIDB Certificate</h3>
-                  <p className="text-sm text-gray-600">Construction Industry</p>
+                <div className="flex items-center justify-center gap-3 mb-4">
+                  <div className="flex-shrink-0 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-lg font-bold">2</div>
+                  <h3 className="text-xl font-bold text-gray-900">CIDB-PPS</h3>
                 </div>
+                <div className="bg-gray-50 rounded-xl border-2 border-primary overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+                  <iframe
+                    src="/CIDB_PPS.pdf"
+                    className="w-full h-96"
+                    title="CIDB-PPS Certificate"
+                    style={{ border: 'none' }}
+                  />
+                </div>
+                <a
+                  href="/CIDB_PPS.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 block text-center text-primary hover:text-primary-dark font-semibold transition-colors"
+                >
+                  View in new page →
+                </a>
               </div>
 
-              {/* Document Placeholder - CIDB-PPS */}
+              {/* PDF Preview - CREAM */}
               <div 
                 ref={(el) => (documentsRefs.current[2] = el)}
-                className={`bg-gray-50 p-6 rounded-xl border-2 border-primary transition-all duration-700 hover:shadow-lg hover:scale-[1.02] ${
+                className={`transition-all duration-700 ${
                   visibleCards.includes('doc-2')
                     ? 'opacity-100 translate-y-0'
                     : 'opacity-0 translate-y-10'
                 }`}
               >
-                <div className="text-center">
-                  <div className="text-5xl mb-4">📑</div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">CIDB-PPS</h3>
-                  <p className="text-sm text-gray-600">Professional Practice</p>
+                <div className="flex items-center justify-center gap-3 mb-4">
+                  <div className="flex-shrink-0 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-lg font-bold">3</div>
+                  <h3 className="text-xl font-bold text-gray-900">CREAM Certificate</h3>
                 </div>
-              </div>
-
-              {/* Document Placeholder - CREAM */}
-              <div 
-                ref={(el) => (documentsRefs.current[3] = el)}
-                className={`bg-gray-50 p-6 rounded-xl border-2 border-primary transition-all duration-700 hover:shadow-lg hover:scale-[1.02] ${
-                  visibleCards.includes('doc-3')
-                    ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 translate-y-10'
-                }`}
-              >
-                <div className="text-center">
-                  <div className="text-5xl mb-4">✅</div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">CREAM Certificate</h3>
-                  <p className="text-sm text-gray-600">Product Conformity</p>
+                <div className="bg-gray-50 rounded-xl border-2 border-primary overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+                  <iframe
+                    src="/CREAM.pdf"
+                    className="w-full h-96"
+                    title="CREAM Certificate"
+                    style={{ border: 'none' }}
+                  />
                 </div>
+                <a
+                  href="/CREAM.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 block text-center text-primary hover:text-primary-dark font-semibold transition-colors"
+                >
+                  View in new page →
+                </a>
               </div>
             </div>
           </div>
