@@ -7,6 +7,7 @@ const About = () => {
   const [imageLoaded, setImageLoaded] = useState(false)
   const visionMissionRefs = useRef([])
   const featuresRefs = useRef([])
+  const directorRef = useRef(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,9 +74,33 @@ const About = () => {
       return observer
     })
 
+    // Observer for Director card
+    const directorObserver = directorRef.current
+      ? new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                setVisibleCards((prev) => [...new Set([...prev, 'director'])])
+              } else {
+                setVisibleCards((prev) => prev.filter((id) => id !== 'director'))
+              }
+            })
+          },
+          {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px',
+          }
+        )
+      : null
+
+    if (directorObserver && directorRef.current) {
+      directorObserver.observe(directorRef.current)
+    }
+
     return () => {
       visionMissionObservers.forEach((observer) => observer?.disconnect())
       featuresObservers.forEach((observer) => observer?.disconnect())
+      directorObserver?.disconnect()
     }
   }, [])
   const features = [
@@ -135,7 +160,14 @@ const About = () => {
 
         {/* Directors */}
         <div className="mb-16">
-          <div className="bg-gray-50 p-8 rounded-2xl border-2 border-primary transition-all duration-700 hover:shadow-xl hover:scale-[1.02] w-full">
+          <div 
+            ref={directorRef}
+            className={`bg-gray-50 p-8 rounded-2xl border-2 border-primary transition-all duration-700 hover:shadow-xl hover:scale-[1.02] w-full ${
+              visibleCards.includes('director')
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-10'
+            }`}
+          >
             <div className="flex items-center justify-center gap-4 mb-6">
               <div className="text-5xl">👔</div>
               <h3 className="text-3xl font-bold text-gray-900">Director</h3>

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import ScrollToTop from './components/ScrollToTop'
 import Navbar from './components/Navbar'
+import FloatingEmailButton from './components/FloatingEmailButton'
 import Home from './pages/Home'
 import About from './pages/About'
 import WhyUs from './pages/WhyUs'
@@ -29,6 +30,7 @@ function App() {
           <Route path="/projects" element={<Projects />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
+        <FloatingEmailButton />
       </div>
     </Router>
   )

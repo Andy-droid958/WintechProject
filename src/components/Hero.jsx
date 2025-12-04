@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import pic20 from '../statics/pic23.jpg'
+import pic20 from '../statics/pic3.jpg'
 
 const Hero = () => {
   const [scrollY, setScrollY] = useState(0)
@@ -34,7 +34,7 @@ const Hero = () => {
   return (
     <section id="home" className="relative h-screen min-h-[500px] overflow-hidden">
       {/* Background Image */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden z-0">
         <img
           src={pic20}
           alt="Wintech Project Sdn Bhd"
@@ -47,6 +47,23 @@ const Hero = () => {
           onLoad={() => setImageLoaded(true)}
         />
       </div>
+
+      {/* Shader Overlay with reduced opacity */}
+      <div 
+        className="absolute inset-0 z-[1] pointer-events-none"
+        style={{
+          background: `linear-gradient(
+            135deg,
+            rgba(107, 114, 128, 0.4) 0%,
+            rgba(75, 85, 99, 0.3) 25%,
+            rgba(107, 114, 128, 0.4) 50%,
+            rgba(75, 85, 99, 0.3) 75%,
+            rgba(107, 114, 128, 0.4) 100%
+          )`,
+          backgroundSize: '200% 200%',
+          animation: 'shaderWave 8s ease infinite',
+        }}
+      ></div>
 
       {/* Content */}
       <div className={`relative z-10 h-full flex items-center justify-center px-4 transition-opacity duration-300 ${

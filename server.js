@@ -8,7 +8,16 @@ const app = express();
 // Serve static files from the dist directory
 app.use(express.static(path.join(__dirname, 'dist')));
 
-// Handle React Router - all routes serve index.html
+// Explicitly serve sitemap.xml and robots.txt before catch-all
+app.get('/sitemap.xml', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'sitemap.xml'));
+});
+
+app.get('/robots.txt', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'robots.txt'));
+});
+
+// Handle React Router - all other routes serve index.html
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
