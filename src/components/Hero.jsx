@@ -48,9 +48,12 @@ const Hero = () => {
         />
       </div>
 
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 z-[1] bg-black/40 pointer-events-none"></div>
+
       {/* Shader Overlay with reduced opacity */}
       <div 
-        className="absolute inset-0 z-[1] pointer-events-none"
+        className="absolute inset-0 z-[2] pointer-events-none"
         style={{
           background: `linear-gradient(
             135deg,
@@ -66,26 +69,12 @@ const Hero = () => {
       ></div>
 
       {/* Content */}
-      <div className={`relative z-10 h-full flex items-center justify-center px-4 transition-opacity duration-300 ${
+      <div className={`relative z-[3] h-full flex items-center justify-center px-4 transition-opacity duration-300 ${
         imageLoaded ? 'opacity-100' : 'opacity-0'
       }`}>
         <div className="text-center" style={{ opacity }}>
           <h1 
             className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 text-red-600"
-            style={{
-              textShadow: `
-                -1px -1px 0px rgba(0, 0, 0, 0.7),
-                1px 1px 0px rgba(255, 255, 255, 0.4),
-                -2px -2px 0px rgba(0, 0, 0, 0.6),
-                2px 2px 0px rgba(255, 255, 255, 0.3),
-                -3px -3px 2px rgba(0, 0, 0, 0.5),
-                3px 3px 2px rgba(255, 255, 255, 0.2),
-                0 0 30px rgba(220, 38, 38, 0.6),
-                0 0 60px rgba(220, 38, 38, 0.4)
-              `,
-              fontWeight: '900',
-              letterSpacing: '0.05em',
-            }}
           >
             Wintech Project SDN BHD
           </h1>
