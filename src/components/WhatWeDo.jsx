@@ -95,10 +95,15 @@ const WhatWeDo = () => {
       image: pic12,
     },
     {
-      title: 'Curtain Wall & Shopfront',
+      title: 'Specialization',
       items: [
-        'Curtain Wall',
-        'Shopfront',
+        'Aluminium Glass Door & Window',
+        'Aluminium Composite Panel',
+        'Aluminium Strip Ceiling',
+        'Aluminium Strip Louvers',
+        'Shower Screen',
+        'Proforated Panel',
+        'Steel Works'
       ],
       image: pic13,
     },

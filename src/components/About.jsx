@@ -159,7 +159,7 @@ const About = () => {
         </div>
 
         {/* Directors */}
-        <div className="mb-16">
+        {/* <div className="mb-16">
           <div 
             ref={directorRef}
             className={`bg-gray-50 p-8 rounded-2xl border-2 border-primary transition-all duration-700 hover:shadow-xl hover:scale-[1.02] w-full ${
@@ -183,7 +183,7 @@ const About = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Vision and Mission */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
