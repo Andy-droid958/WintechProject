@@ -90,7 +90,7 @@ const Contact = () => {
                     </h3>
                     {item.label === 'Email' ? (
                       <a
-                        href={`https://mail.google.com/mail/?view=cm&fs=1&to=${item.value}`}
+                        href={`https://mail.google.com/mail/?view=cm&fs=1&tf=0&to=${item.value}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-lg font-semibold text-gray-900 hover:text-primary transition-colors cursor-pointer"

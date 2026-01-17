@@ -5,8 +5,8 @@ const FloatingEmailButton = () => {
   const emailAddress = 'wintechpsb@gmail.com'
 
   const handleClick = () => {
-    // Open Gmail compose window
-    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${emailAddress}`
+    // Open Gmail compose window in web browser (tf=0 forces web version, prevents app redirect)
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&tf=0&to=${emailAddress}`
     window.open(gmailUrl, '_blank', 'noopener,noreferrer')
   }
 

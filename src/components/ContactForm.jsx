@@ -45,11 +45,11 @@ const ContactForm = () => {
     const encodedSubject = encodeURIComponent(formData.subject || 'Contact Form Inquiry')
     const encodedBody = encodeURIComponent(emailBody)
     
-    // Create Gmail mailto URL
-    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${emailAddress}&su=${encodedSubject}&body=${encodedBody}`
+    // Create Gmail URL (tf=0 forces web version, prevents app redirect on mobile/tablet)
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&tf=0&to=${emailAddress}&su=${encodedSubject}&body=${encodedBody}`
     
-    // Open Gmail in a new window/tab
-    window.open(gmailUrl, '_blank')
+    // Open Gmail in a new window/tab (web browser)
+    window.open(gmailUrl, '_blank', 'noopener,noreferrer')
     
     // Reset form
     setFormData({
